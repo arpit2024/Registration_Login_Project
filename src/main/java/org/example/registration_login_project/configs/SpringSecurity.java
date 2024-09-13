@@ -18,15 +18,34 @@ public class SpringSecurity {
     //Configure the SecurityFilterChain- a chain of filters that are responsible for processing the request
     @Bean//disable CSRF feature as we are not using it
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    /*
+    we need to allow all the users to register to our application.
+    if I click on register URL, it will redirect to the login page. We have to allow all the users to
+    navigate to the register/other URL page
+    configure spring security in such a way that will allow all the users to access homepage in the register page.*/
+
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorizeRequests -> authorizeRequests
-                        .anyRequest().authenticated()
+
+    /* we want to provide access that is registered slash star star and then let's call permit all method.
+    It means that we are allowing all the requests.It starts with slash register and here we are providing star,
+    star because if we go to our Auth controller
+    we have one of the request like /register/save- right? So in order to handle this kind of request, we have to provide /**.
+    It means we allow all the request. */
+
+                .requestMatchers("/register/**").permitAll()//so here for register and index page everyone can access
+                .requestMatchers("/index").permitAll()
+                .requestMatchers("/users").hasRole("ADMIN")//but for users page only admin-role can access-so changed the role to admin in app.properties file
+                  //.anyRequest().authenticated()
                 )
+
+
+
     //we can use this form login method to configure the custom login page
     //well form login method provides a form object we can use it to configure spring security for custom login form
 
-/*
+       /*
     So here just type form and then lambda symbol and then form object.
     It has a login page method and let's pass the URL slash login. So this will react to the custom logging page.
     And next, let's configure the log in processing URL for that,and then pass slash logging.
@@ -40,6 +59,7 @@ public class SpringSecurity {
 
     And finally, let's build this HTTP Object by using build method.
     So this will return security filter chain object.         */
+
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
@@ -50,7 +70,8 @@ public class SpringSecurity {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
                 );
-   /*once you are logged into our application , you can see the log out link. So logged in user can use this log
+   /*
+   once you are logged into our application , you can see the log out link. So logged in user can use this log
     link to log out from this application.
     we have to add the log of success message at the top of this in form.
     Well, in order to get this log parameter in the URL, we have to configure the spring security forlog out.
