@@ -32,6 +32,12 @@ xmlns: th="http://www.thymeleaf.org"
             <div class="card">
                 <div class="card-header">
                     <h2 class = "text-center">Registration Form</h2>
+                </div >
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        You have Successfully Registered our App!
+                    </div>
+
                 </div>
                 <div class="card-body">
                     <form
