@@ -40,7 +40,13 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
 
     }
-    //lets create a private method to check if role exist in DB if nor create a role and save into DB
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    //let's create a private method to check if role exists in DB if not create a role and save into DB
     private Role checkRoleExist(){
         Role role=new Role();
         role.setName("ROLE_ADMIN");
