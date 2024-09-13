@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 //in order to enable spring security support in a spring MVC application, we have to use add enablewebSecurity Annotation
@@ -24,15 +25,7 @@ public class SpringSecurity {
                 )
     //we can use this form login method to configure the custom login page
     //well form login method provides a form object we can use it to configure spring security for custom login form
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/users")//once successfully logged in we will be navigated to users page-default
-                        .permitAll()
-                );
-        return http.build();
-    }
-}
+
 /*
     So here just type form and then lambda symbol and then form object.
     It has a login page method and let's pass the URL slash login. So this will react to the custom logging page.
@@ -47,3 +40,26 @@ public class SpringSecurity {
 
     And finally, let's build this HTTP Object by using build method.
     So this will return security filter chain object.         */
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/users")//once successfully logged in we will be navigated to users page-default
+                        .permitAll()
+                ).logout(
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .permitAll()
+                );
+   /*once you are logged into our application , you can see the log out link. So logged in user can use this log
+    link to log out from this application.
+    we have to add the log of success message at the top of this in form.
+    Well, in order to get this log parameter in the URL, we have to configure the spring security forlog out.
+
+    let's go ahead and click on the logout You can see in a URL we got a question mark log parameter
+    So in order to get this log parameter, we have configured a spring security for log
+    Next, we can use this log parameter to add a success log message in this login form.    */
+
+        return http.build();
+    }
+}
+
