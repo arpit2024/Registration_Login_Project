@@ -33,13 +33,16 @@ thymeleaf namespace at the beginning of this html page -->
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
+            <div th:if="${param.logout}">
+                <div class="alert alert-success">You have been logged out.</div>
+            </div>
 <!--we will keep the login form within a card so that we have a border for the form-->
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-center">Login Form</h2>
                 </div>
-<!--The card header is done now,Let's design the card Body-->
             </div>
+<!--The card header is done now,Let's design the card Body-->
             <div class="card-body">
                 <form
                     method="post"
@@ -75,11 +78,9 @@ thymeleaf namespace at the beginning of this html page -->
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <span> Not registered ?
                             <a th:href="@{/register}">Register/Signup here</a>
-
                         </span>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
