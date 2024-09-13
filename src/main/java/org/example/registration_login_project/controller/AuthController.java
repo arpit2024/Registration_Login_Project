@@ -29,8 +29,13 @@ public class AuthController {
         return "index";
     }
 
-    //handler method to handle user Registration form request
+    //handler method to handle login request
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
+    //handler method to handle user Registration form request
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         //create a model attribute to bind/store form data
