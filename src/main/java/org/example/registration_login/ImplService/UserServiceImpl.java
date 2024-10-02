@@ -1,11 +1,11 @@
-package org.example.registration_login_project.ImplService;
+package org.example.registration_login.ImplService;
 
-import org.example.registration_login_project.dtos.UserDto;
-import org.example.registration_login_project.models.Role;
-import org.example.registration_login_project.models.User;
-import org.example.registration_login_project.repository.RoleRepository;
-import org.example.registration_login_project.repository.UserRepository;
-import org.example.registration_login_project.services.UserService;
+import org.example.registration_login.dtos.UserDto;
+import org.example.registration_login.models.Role;
+import org.example.registration_login.models.User;
+import org.example.registration_login.repository.RoleRepository;
+import org.example.registration_login.repository.UserRepository;
+import org.example.registration_login.services.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

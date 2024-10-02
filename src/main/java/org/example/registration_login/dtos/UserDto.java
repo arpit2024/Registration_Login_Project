@@ -1,4 +1,4 @@
-package org.example.registration_login_project.dtos;
+package org.example.registration_login.dtos;
 
 
 //inorder to store the registration form data we need to have a model object

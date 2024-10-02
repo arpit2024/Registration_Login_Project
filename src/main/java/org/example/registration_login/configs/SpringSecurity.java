@@ -1,8 +1,7 @@
-package org.example.registration_login_project.configs;
+package org.example.registration_login.configs;
 
 //Make this class as a spring java Based configuration by using @Configuration annotation
 //Now we can define spring bean
-import org.aspectj.weaver.ast.And;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

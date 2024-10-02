@@ -39,54 +39,53 @@ thymeleaf namespace at the beginning of this html page -->
             <div th:if="${param.logout}">
                 <div class="alert alert-success">You have been logged out.</div>
             </div>
-<!--we will keep the login form within a card so that we have a border for the form-->
+            <!--we will keep the login form within a card so that we have a border for the form-->
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-center">Login Form</h2>
                 </div>
-<!--The card header is done now,Let's design the card Body-->
-            <div class="card-body">
-                <form
-                    method="post"
-                    role="form"
-                    th:action="@{/login}"
-                    th:object="${user}"
-                    class="form-horizontal"
-                >
-            <!--define the form input field-->
-                    <div class="from-group mb-3">
-                        <label class="control-label">Email</label>
-        <!--so here field name should be given as username because Spring security will use this
-        name="username" field to get the value-->
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            class="form-control"
-                            placeholder="Enter your email"
-                        />
-                    </div>
-                    <div class="from-group mb-3">
-                        <label class="control-label">Password</label>
-                        <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="form-control"
-                                placeholder="Enter password"
-                        />
-                    </div>
-                    <div class="form-group mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <span> Not registered ?
-                            <a th:href="@{/register}">Register/Signup here</a>
-                        </span>
-                    </div>
-                </form>
-            </div>
+                <!--The card header is done now,Let's design the card Body-->
+                <div class="card-body">
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/login}"
+                            th:object="${user}"
+                            class="form-horizontal"
+                    >
+                        <!--define the form input field-->
+                        <div class="from-group mb-3">
+                            <label class="control-label">Email</label>
+                            <!--so here field name should be given as username because Spring security will use this
+                            name="username" field to get the value-->
+                            <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Enter your email"
+                            />
+                        </div>
+                        <div class="from-group mb-3">
+                            <label class="control-label">Password</label>
+                            <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-control"
+                                    placeholder="Enter password"
+                            />
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <span> Not registered ?
+                                <a th:href="@{/register}">Register/Signup here</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 </html>

@@ -1,9 +1,9 @@
-package org.example.registration_login_project.controller;
+package org.example.registration_login.controller;
 
 import jakarta.validation.Valid;
-import org.example.registration_login_project.dtos.UserDto;
-import org.example.registration_login_project.models.User;
-import org.example.registration_login_project.services.UserService;
+import org.example.registration_login.dtos.UserDto;
+import org.example.registration_login.models.User;
+import org.example.registration_login.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

@@ -1,4 +1,4 @@
-package org.example.registration_login_project.models;
+package org.example.registration_login.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
