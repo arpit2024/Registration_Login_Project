@@ -25,20 +25,20 @@ This is a Spring Boot application that handles user registration and login with 
 
 The application will start on http://localhost:8080.
 
-** Endpoints **
+**Endpoints**
 
-- URL: **/index**
-- Description: Displays the home page.
+- **URL: /index**
+Description: Displays the home page.
 Registration
 
-- URL: **/register**
+- **URL: /register**
 Description: Displays the registration form.
 Login
 
-- URL: **/login**
+- **URL: /login**
 Description: Displays the login page for user authentication.
 
-- URL: **/logout**
+- **URL: /logout**
 Description: Displays the logout page for user authentication.
 
 
