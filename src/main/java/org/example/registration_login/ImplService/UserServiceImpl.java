@@ -6,6 +6,7 @@ import org.example.registration_login.models.User;
 import org.example.registration_login.repository.RoleRepository;
 import org.example.registration_login.repository.UserRepository;
 import org.example.registration_login.services.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -17,19 +18,25 @@ public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    //inject the password encoder here
+    private PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
+    //Basically, here we have stored a password as a plain text.We have to encrypt or encoded
+    // this password before we store in our database, so lets use bcrypt encoder to encode the password
     @Override
     public void saveUser(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getFirstName()+" "+userDto.getLastName());
         user.setEmail(userDto.getEmail());
         //encrypt the password using spring security-pwd Encoder than save to DB
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         Role role = roleRepository.findByName("ROLE_ADMIN");
 

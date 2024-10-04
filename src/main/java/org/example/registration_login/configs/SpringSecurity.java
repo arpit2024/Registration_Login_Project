@@ -1,11 +1,29 @@
 package org.example.registration_login.configs;
 
+/* some imp points:-
+- Well, spring security six onwards, we don't have to manually set the user details, service and
+password in order to authentication manager.
+- Spring security will automatically set user details, service and password encoded objects to the authentication
+- So we just have to make sure that user details service bean and the password bean exists in the spring application context.
+- spring security will automatically inject these beans to the authentication manager.
+We don't have to manually set these beans.
+ */
+
+
 //Make this class as a spring java Based configuration by using @Configuration annotation
 //Now we can define spring bean
+import org.example.registration_login.security.CustomUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.PasswordManagementDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -13,6 +31,24 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //in order to enable spring security support in a spring MVC application, we have to use add enablewebSecurity Annotation
 @EnableWebSecurity
 public class SpringSecurity {
+
+    //we need to inject user details service in this spring security configuration class
+    //So here let me create the instance variable private user details service
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+//can be commented because-no manual setting of user details service and password encoder is required.(explained above)
+
+    /*
+     if you go to user details-user service class, we have stored the plain text password in our database
+    But we have to encrypt this password before we save to the database.
+    Or we'll use spring security provided bcrypt password encoder.
+    So go to spring security. And here let's create a BcryptPasswordEncoder.*/
+    @Bean
+    public static PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+
 
     //Configure the SecurityFilterChain- a chain of filters that are responsible for processing the request
     @Bean//disable CSRF feature as we are not using it
@@ -81,5 +117,14 @@ public class SpringSecurity {
 
         return http.build();
     }
+
+    //Public method to set user details, service and password encoder bean to Authentication manager.
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {// we will use basically authentication manager builder to build that Authentication manager object.
+//       builder.userDetailsService(userDetailsService)
+//               .passwordEncoder(passwordEncoder());
+//    }
+    // no need to manually set user details service and password encoder in authentication manager.(explained above)
+
 }
 
