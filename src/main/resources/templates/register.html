@@ -96,7 +96,7 @@ xmlns: th="http://www.thymeleaf.org"
                                 name="password"
                                 placeholder="Enter your Password"
                                 th:field="*{password}"
-                                type="text"
+                                type="password"
                             />
                             <p th:errors="*{password}" class="text-danger">
                             th:if="${#fields.hasErrors('password')}"</p>
